@@ -4,11 +4,13 @@ Plataforma B2B2C que auxilia o processo de recrutamento: conecta pessoas e empre
 
 ## Fluxos
 
+Para recomeçar a demonstração do zero, use "Reiniciar demonstração" no rodapé.
+
+
 | Público | Caminho |
 | --- | --- |
-| Candidato | `/candidatos` → `/candidato/quiz` → `/candidato/perfil` → `/candidato/vagas` → `/candidato/trilha/:vaga` → `/candidato/entrevista/:vaga` |
+| Candidato | `/candidatos` → `/candidato/quiz` → `/candidato/perfil` → `/candidato/vagas` → `/candidato/trilha/:vaga` → `/candidato/entrevista` |
 | Empresa | `/empresas` → `/empresa/cultura` → `/empresa/painel` |
-| Validação | `/pesquisa` (links das pesquisas + botão para reiniciar a demonstração) |
 
 ## Rodar localmente
 
@@ -18,15 +20,6 @@ npm run dev
 ```
 
 Abra http://localhost:5173.
-
-## Configurar as pesquisas
-
-Cole os links dos formulários (Google Forms, Typeform etc.) em `src/config.ts`:
-
-```ts
-export const SURVEY_URL_EMPRESAS = 'https://...'
-export const SURVEY_URL_CANDIDATOS = 'https://...'
-```
 
 ## Publicar grátis no GitHub Pages
 
@@ -48,7 +41,7 @@ O build usa o nome do repositório como caminho base, e o `404.html` gerado no d
 
 ## Treino de entrevista
 
-Liberado nas vagas em que o candidato tem pelo menos 70% de fit cultural. Cada área (front-end, dados, design, full-stack, back-end, análise) tem um recrutador fictício com perguntas próprias, e duas perguntas vêm das dimensões mais marcantes da cultura da empresa.
+Fica no menu ("Treino de entrevista") e abre direto com o recrutador da área de maior fit; o candidato pode trocar para outra vaga liberada (pelo menos 70% de fit cultural). Cada área (front-end, dados, design, full-stack, back-end, análise) tem um recrutador fictício com perguntas próprias, e duas perguntas vêm das dimensões mais marcantes da cultura da empresa.
 
 Neste MVP o recrutador é **simulado** (`src/lib/interviewer.ts`): as respostas são avaliadas por regras simples (tamanho, estrutura situação-ação-resultado e termos esperados da área). Para usar uma IA de verdade, é preciso um backend que guarde a chave da API, já que o GitHub Pages só serve arquivos estáticos.
 

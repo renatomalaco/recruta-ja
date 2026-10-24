@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { clearAll } from '../lib/storage'
 import { Logo } from './Logo'
 
 export function Footer() {
@@ -13,8 +14,18 @@ export function Footer() {
           <Link to="/empresas">Para empresas</Link>
           <Link to="/candidatos">Para candidatos</Link>
           <Link to="/candidato/quiz">Mapeamento cultural</Link>
+          <Link to="/candidato/entrevista">Treino de entrevista</Link>
           <Link to="/empresa/cultura">Perfil da empresa</Link>
-          <Link to="/pesquisa">Responder a pesquisa</Link>
+          <button
+            type="button"
+            className="footer-reset"
+            onClick={() => {
+              clearAll()
+              window.location.assign(import.meta.env.BASE_URL)
+            }}
+          >
+            Reiniciar demonstração
+          </button>
         </nav>
         <p className="footer-note">
           Protótipo de validação. Empresas, vagas e pessoas exibidas aqui são fictícias.

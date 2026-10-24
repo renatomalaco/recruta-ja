@@ -130,7 +130,8 @@ export default function Home() {
         <div className="field field--magenta split-side">
           <h2 className="h2">Sua primeira vaga não deveria exigir três anos de experiência.</h2>
           <p className="measure">
-            Mostre quem você é. Se faltar alguma tecnologia para a vaga certa, você aprende aqui antes de começar.
+            Mostre quem você é. Se faltar alguma tecnologia para a vaga certa, você aprende aqui e ainda ensaia a
+            entrevista com um recrutador de IA.
           </p>
           <Link to="/candidatos" className="btn btn--sun">
             Ver a solução para candidatos
@@ -182,15 +183,20 @@ export default function Home() {
       <section className="field field--ink cta-band">
         <div className="container cta-band-inner">
           <div>
-            <h2 className="h2">Ajude a construir o Recruta Já.</h2>
+            <h2 className="h2">Comece pelo seu lado.</h2>
             <p className="measure">
-              Estamos validando a ideia com empresas e estudantes da região. Sua resposta leva uns cinco minutos e muda
-              o que a gente constrói.
+              Empresas descrevem a própria cultura em poucos minutos. Candidatos descobrem o fit, treinam a técnica que
+              falta e ensaiam a entrevista.
             </p>
           </div>
-          <Link to="/pesquisa" className="btn btn--sun">
-            Responder a pesquisa
-          </Link>
+          <div className="actions">
+            <Link to="/empresa/cultura" className="btn btn--sun">
+              Criar o perfil da empresa
+            </Link>
+            <Link to="/candidato/quiz" className="btn btn--outline-light">
+              Descobrir meu fit
+            </Link>
+          </div>
         </div>
       </section>
     </>

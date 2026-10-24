@@ -89,13 +89,9 @@ export default function Empresas() {
             Para cada pessoa com o perfil certo e alguma lacuna técnica, a plataforma monta uma trilha com o que a vaga
             exige. Você acompanha o progresso no painel e contrata quem concluiu, sem custo de treinamento interno.
           </p>
-          <p className="muted measure">
-            Nosso objetivo agora é entender os desafios de retenção da sua empresa. A pesquisa ajuda a validar o
-            impacto de contratar primeiro pela cultura.
-          </p>
           <div className="actions">
-            <Link to="/pesquisa" className="btn btn--ink">
-              Responder a pesquisa para empresas
+            <Link to="/empresa/painel" className="btn btn--ink">
+              Ver o painel de demonstração
             </Link>
           </div>
         </div>

@@ -30,9 +30,6 @@ export default function Candidatos() {
             <Link to="/candidato/quiz" className="btn btn--sun">
               Descobrir meu fit
             </Link>
-            <Link to="/pesquisa" className="btn btn--outline-light">
-              Responder a pesquisa
-            </Link>
           </div>
         </div>
       </section>
@@ -59,6 +56,38 @@ export default function Candidatos() {
             </ul>
           </div>
         </div>
+      </section>
+
+      <section className="section container interview-teaser">
+        <div className="interview-teaser-copy">
+          <h2 className="h2">Ensaie a entrevista com um recrutador de IA.</h2>
+          <p className="muted measure">
+            Depois do mapeamento, um recrutador especializado na área em que você mais combina simula a entrevista: faz
+            perguntas sobre a cultura da empresa e situações técnicas, comenta cada resposta e te dá uma nota no final.
+          </p>
+          <Link to="/candidato/entrevista" className="btn btn--ink">
+            Treinar minha entrevista
+          </Link>
+        </div>
+        <ol className="chat chat--sample" aria-label="Exemplo de conversa">
+          <li className="msg msg--recruiter">
+            <span className="recruiter-avatar" aria-hidden>
+              BA
+            </span>
+            <p className="msg-bubble">Nosso ritmo é intenso. Conte de uma vez em que você entregou algo com prazo apertado.</p>
+          </li>
+          <li className="msg msg--me">
+            <p className="msg-bubble">
+              No estágio, o prazo foi antecipado. Eu priorizei o essencial, alinhei com o time e entreguei em dois dias.
+            </p>
+          </li>
+          <li className="msg msg--recruiter">
+            <span className="recruiter-avatar" aria-hidden>
+              BA
+            </span>
+            <p className="msg-bubble">Gostei do exemplo. Se puder, feche com o resultado: o que mudou depois da entrega?</p>
+          </li>
+        </ol>
       </section>
 
       <section className="section container quiz-teaser">

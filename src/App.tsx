@@ -11,7 +11,6 @@ import Empresas from './pages/Empresas'
 import Home from './pages/Home'
 import NotFound from './pages/NotFound'
 import Perfil from './pages/Perfil'
-import Pesquisa from './pages/Pesquisa'
 import Quiz from './pages/Quiz'
 import Trilha from './pages/Trilha'
 import Vagas from './pages/Vagas'
@@ -42,10 +41,10 @@ export default function App() {
             <Route path="/candidato/perfil" element={<Perfil />} />
             <Route path="/candidato/vagas" element={<Vagas />} />
             <Route path="/candidato/trilha/:jobId" element={<Trilha />} />
+            <Route path="/candidato/entrevista" element={<Entrevista />} />
             <Route path="/candidato/entrevista/:jobId" element={<Entrevista />} />
             <Route path="/empresa/cultura" element={<EmpresaCultura />} />
             <Route path="/empresa/painel" element={<EmpresaPainel />} />
-            <Route path="/pesquisa" element={<Pesquisa />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>

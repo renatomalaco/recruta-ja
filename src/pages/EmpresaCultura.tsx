@@ -1,4 +1,4 @@
-import { AnimatePresence, motion } from 'motion/react'
+import { motion } from 'motion/react'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { FitRuler, RulerLegend } from '../components/FitRuler'
@@ -71,12 +71,10 @@ export default function EmpresaCultura() {
       </ol>
 
       <div className="wizard-body">
-        <AnimatePresence mode="wait" initial={false}>
           <motion.div
             key={step}
             initial={{ opacity: 0, transform: 'translateY(6px)' }}
             animate={{ opacity: 1, transform: 'translateY(0px)' }}
-            exit={{ opacity: 0 }}
             transition={{ duration: 0.2, ease: [0.23, 1, 0.32, 1] }}
           >
             {step === 0 && (
@@ -199,7 +197,6 @@ export default function EmpresaCultura() {
               </div>
             )}
           </motion.div>
-        </AnimatePresence>
       </div>
 
       <div className="wizard-actions">

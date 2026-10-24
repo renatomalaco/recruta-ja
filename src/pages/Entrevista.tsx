@@ -1,10 +1,10 @@
 import { Lock, RotateCcw, SendHorizontal } from 'lucide-react'
 import { AnimatePresence, motion } from 'motion/react'
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { FitNumber } from '../components/FitNumber'
 import { Progress } from '../components/Progress'
-import { companyById, jobById, jobName } from '../data/companies'
+import { JOBS, companyById, jobById, jobName } from '../data/companies'
 import { INTERVIEW_MIN_FIT, RECRUITERS } from '../data/interview'
 import { QUESTIONS } from '../data/questions'
 import { culturalFit, vectorFromAnswers } from '../lib/fit'
@@ -23,7 +23,8 @@ interface Message {
 const TYPING_MS = 900
 
 export default function Entrevista() {
-  const { jobId = '' } = useParams()
+  const { jobId } = useParams()
+  const navigate = useNavigate()
   const [answers] = useStored<Record<string, number>>('answers', {})
   const [, setScores] = useStored<Record<string, number>>('interviews', {})
   const [messages, setMessages] = useState<Message[]>([])
@@ -37,7 +38,18 @@ export default function Entrevista() {
   const inputRef = useRef<HTMLTextAreaElement>(null)
   const nextId = useRef(0)
 
-  const job = jobById(jobId)
+  const profileDone = Object.keys(answers).length >= QUESTIONS.length
+  // Vagas em que o treino está liberado, da maior para a menor afinidade cultural.
+  const eligible = useMemo(() => {
+    if (!profileDone) return []
+    const me = vectorFromAnswers(answers)
+    return JOBS.map((j) => ({ job: j, fit: culturalFit(companyById(j.companyId)!.culture, me) }))
+      .filter((r) => r.fit >= INTERVIEW_MIN_FIT)
+      .sort((a, b) => b.fit - a.fit)
+  }, [answers, profileDone])
+
+  // Sem vaga na URL, o recrutador é o da área com maior fit.
+  const job = jobId ? jobById(jobId) : eligible[0]?.job
   const company = job ? companyById(job.companyId) : undefined
   const script = useMemo(() => (job && company ? buildScript(job.area, company.culture) : []), [job, company])
 
@@ -45,7 +57,21 @@ export default function Entrevista() {
     endRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' })
   }, [messages, typing])
 
-  if (Object.keys(answers).length < QUESTIONS.length) return <EmptyProfile />
+  if (!profileDone) return <EmptyProfile />
+  if (!jobId && !job) {
+    return (
+      <section className="section container empty">
+        <Lock size={28} strokeWidth={1.75} aria-hidden />
+        <h1 className="h2">O treino de entrevista abre com {INTERVIEW_MIN_FIT}% de fit</h1>
+        <p className="muted measure">
+          Ainda não há vagas com fit cultural suficiente para o seu perfil. Refaça o mapeamento ou acompanhe novas vagas.
+        </p>
+        <Link to="/candidato/vagas" className="btn btn--ink">
+          Ver vagas
+        </Link>
+      </section>
+    )
+  }
   if (!job || !company) return <NotFound />
 
   const recruiter = RECRUITERS[job.area]
@@ -140,6 +166,23 @@ export default function Entrevista() {
 
       {!started ? (
         <div className="interview-intro panel">
+          {eligible.length > 1 && (
+            <div className="field-group interview-pick">
+              <label htmlFor="vaga">Treinar para a vaga</label>
+              <select
+                id="vaga"
+                className="input"
+                value={job.id}
+                onChange={(e) => navigate(`/candidato/entrevista/${e.target.value}`)}
+              >
+                {eligible.map(({ job: j, fit: f }) => (
+                  <option key={j.id} value={j.id}>
+                    {jobName(j)}, {companyById(j.companyId)!.name} ({f}% de fit)
+                  </option>
+                ))}
+              </select>
+            </div>
+          )}
           <h2 className="h3">Como funciona</h2>
           <ul className="interview-rules">
             <li>

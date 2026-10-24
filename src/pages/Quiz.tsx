@@ -1,6 +1,6 @@
-import { ArrowLeft, Check } from 'lucide-react'
-import { AnimatePresence, motion } from 'motion/react'
-import { useRef, useState } from 'react'
+import { ArrowLeft, ArrowRight, Check } from 'lucide-react'
+import { motion } from 'motion/react'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Progress } from '../components/Progress'
 import { HARD_SKILLS, type HardSkill } from '../data/dimensions'
@@ -15,72 +15,56 @@ export default function Quiz() {
   const [skills, setSkills] = useStored<HardSkill[]>('skills', [])
   const [step, setStep] = useState(0)
   const [direction, setDirection] = useState(1)
-  const advancing = useRef<number | null>(null)
 
   const isSkillsStep = step === QUESTIONS.length
   const question = QUESTIONS[step]
+  const answered = Object.keys(answers).length
+  const currentAnswered = isSkillsStep || answers[question.id] !== undefined
 
   function go(next: number) {
+    if (next < 0 || next > QUESTIONS.length) return
     setDirection(next > step ? 1 : -1)
     setStep(next)
   }
 
   function choose(value: number) {
-    // Ignora cliques durante a transição (inclusive na pergunta que está saindo).
-    if (advancing.current) return
     setAnswers((prev) => ({ ...prev, [question.id]: value }))
-    // Pequena pausa para a escolha ser vista antes de avançar.
-    advancing.current = window.setTimeout(() => {
-      go(step + 1)
-      window.setTimeout(() => (advancing.current = null), 260)
-    }, 220)
   }
 
   function toggleSkill(skill: HardSkill) {
     setSkills((prev) => (prev.includes(skill) ? prev.filter((s) => s !== skill) : [...prev, skill]))
   }
 
-  const answered = Object.keys(answers).length
-
   return (
     <section className="quiz container">
       <div className="quiz-top">
-        <button
-          type="button"
-          className="btn btn--ghost btn--sm"
-          onClick={() => go(step - 1)}
-          disabled={step === 0}
-        >
-          <ArrowLeft size={16} strokeWidth={2} aria-hidden /> Voltar
-        </button>
+        <span className="small muted">Mapeamento cultural</span>
         <span className="small muted tnum" aria-live="polite">
           {step + 1} de {TOTAL}
         </span>
       </div>
       <Progress value={((step + (isSkillsStep ? 1 : 0)) / TOTAL) * 100} label="Progresso do mapeamento" />
 
-      <AnimatePresence mode="wait" initial={false} custom={direction}>
         <motion.div
           key={step}
           className="quiz-card"
-          custom={direction}
-          initial={{ opacity: 0, transform: `translateX(${direction * 24}px)`, filter: 'blur(4px)' }}
-          animate={{ opacity: 1, transform: 'translateX(0px)', filter: 'blur(0px)' }}
-          exit={{ opacity: 0, transform: `translateX(${direction * -12}px)`, filter: 'blur(2px)' }}
+          initial={{ opacity: 0, transform: `translateX(${direction * 24}px)` }}
+          animate={{ opacity: 1, transform: 'translateX(0px)' }}
           transition={{ duration: 0.22, ease: [0.23, 1, 0.32, 1] }}
         >
           {!isSkillsStep ? (
             <fieldset className="quiz-fieldset">
               <legend className="quiz-question">{question.prompt}</legend>
-              <div className="quiz-options">
+              <div className="quiz-options" role="radiogroup" aria-label="Alternativas">
                 {question.options.map((o) => {
                   const selected = answers[question.id] === o.value
                   return (
                     <button
                       key={o.label}
                       type="button"
+                      role="radio"
                       className="option"
-                      aria-pressed={selected}
+                      aria-checked={selected}
                       onClick={() => choose(o.value)}
                     >
                       <span className="option-check" aria-hidden>
@@ -111,23 +95,32 @@ export default function Quiz() {
                   </button>
                 ))}
               </div>
-              <div className="actions">
-                <button
-                  type="button"
-                  className="btn btn--ink"
-                  disabled={answered < QUESTIONS.length}
-                  onClick={() => navigate('/candidato/perfil')}
-                >
-                  Ver meu resultado
-                </button>
-                {answered < QUESTIONS.length && (
-                  <span className="small muted">Faltam {QUESTIONS.length - answered} situações para responder.</span>
-                )}
-              </div>
+              {answered < QUESTIONS.length && (
+                <p className="small muted">Faltam {QUESTIONS.length - answered} situações para responder.</p>
+              )}
             </fieldset>
           )}
         </motion.div>
-      </AnimatePresence>
+
+      <div className="quiz-nav">
+        <button type="button" className="btn btn--ghost" onClick={() => go(step - 1)} disabled={step === 0}>
+          <ArrowLeft size={16} strokeWidth={2} aria-hidden /> Voltar
+        </button>
+        {isSkillsStep ? (
+          <button
+            type="button"
+            className="btn btn--ink"
+            disabled={answered < QUESTIONS.length}
+            onClick={() => navigate('/candidato/perfil')}
+          >
+            Ver meu resultado
+          </button>
+        ) : (
+          <button type="button" className="btn btn--ink" disabled={!currentAnswered} onClick={() => go(step + 1)}>
+            Próxima <ArrowRight size={16} strokeWidth={2} aria-hidden />
+          </button>
+        )}
+      </div>
     </section>
   )
 }

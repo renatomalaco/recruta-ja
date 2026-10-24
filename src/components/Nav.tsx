@@ -7,8 +7,8 @@ import { Logo } from './Logo'
 const LINKS = [
   { to: '/empresas', label: 'Para empresas' },
   { to: '/candidatos', label: 'Para candidatos' },
+  { to: '/candidato/entrevista', label: 'Treino de entrevista' },
   { to: '/empresa/painel', label: 'Painel demo' },
-  { to: '/pesquisa', label: 'Pesquisa' },
 ]
 
 export function Nav() {

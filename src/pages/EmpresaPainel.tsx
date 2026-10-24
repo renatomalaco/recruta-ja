@@ -125,19 +125,19 @@ export default function EmpresaPainel() {
                   <span className="small muted block">{c.course}</span>
                 </span>
               </span>
-              <span role="cell" className="cell-fit">
+              <span role="cell" className="cell-fit" data-label="Fit cultural">
                 <span className="tnum strong">{fit}%</span>
                 <span className="fit-bar" aria-hidden>
                   <span style={{ transform: `scaleX(${fit / 100})` }} />
                 </span>
               </span>
-              <span role="cell" className="small">
+              <span role="cell" className="small" data-label="Lacunas técnicas">
                 {gaps.length ? gaps.join(', ') : <span className="muted">Nenhuma</span>}
               </span>
-              <span role="cell" className="small tnum">
+              <span role="cell" className="small tnum" data-label="Trilha">
                 {gaps.length ? `${c.trackProgress}%` : <span className="muted">Não precisa</span>}
               </span>
-              <span role="cell">
+              <span role="cell" data-label="Risco de desalinhamento">
                 <span className={`risk risk--${r.tone}`}>{r.label}</span>
               </span>
             </button>

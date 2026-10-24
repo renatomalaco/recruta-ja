@@ -71,6 +71,16 @@ export default function Perfil() {
               <p className="small muted">Nenhuma ainda. Tudo bem: as trilhas existem para isso.</p>
             )}
           </div>
+          <div className="interview-cta">
+            <h2 className="h3">Treine a entrevista com um recrutador de IA</h2>
+            <p className="small muted">
+              Um recrutador da área em que você mais combina simula a entrevista, dá dicas a cada resposta e uma nota no
+              final.
+            </p>
+            <Link to="/candidato/entrevista" className="btn btn--ink btn--sm">
+              Começar o treino de entrevista
+            </Link>
+          </div>
           <div className="actions">
             <Link to="/candidato/vagas" className="btn btn--ink">
               Ver vagas com fit

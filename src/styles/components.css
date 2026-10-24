@@ -208,7 +208,7 @@
   margin-top: 4px;
 }
 
-@media (max-width: 860px) {
+@media (max-width: 960px) {
   .nav-links,
   .nav-cta {
     display: none;
@@ -218,7 +218,7 @@
   }
 }
 
-@media (min-width: 861px) {
+@media (min-width: 961px) {
   .nav-sheet {
     display: none;
   }
@@ -259,6 +259,25 @@
   .footer-links a:hover {
     color: var(--ink);
     text-decoration: underline;
+  }
+}
+
+.footer-reset {
+  justify-self: start;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--ink-2);
+  font-size: 1rem;
+  text-align: left;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  text-decoration-thickness: 1px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .footer-reset:hover {
+    color: var(--ink);
   }
 }
 
