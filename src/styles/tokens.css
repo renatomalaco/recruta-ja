@@ -1,0 +1,79 @@
+:root {
+  color-scheme: light;
+
+  /* Campos de cor da marca */
+  --sun: #ffd43b;
+  --on-sun: #241030;
+  --cobalt: #3442f0;
+  --cobalt-deep: #2632c9;
+  --magenta: #e0347e;
+  --magenta-deep: #b81f62;
+  --mint: #0f9f78;
+  --mint-ink: #0a7457;
+
+  /* Superfícies e tinta (neutros puxados para o ameixa da marca) */
+  --paper: #f6f4fa;
+  --surface: #ffffff;
+  --surface-2: #efebf5;
+  --ink: #241030;
+  --ink-2: #5b4a68;
+  --line: #e2dcea;
+  --line-strong: #c9bfd6;
+
+  --risk-low-bg: #dff5ec;
+  --risk-low: #0a6a50;
+  --risk-mid-bg: #fff1c2;
+  --risk-mid: #7a5300;
+  --risk-high-bg: #fde3ec;
+  --risk-high: #a3164f;
+
+  /* Tipografia */
+  --font: 'Bricolage Grotesque Variable', ui-sans-serif, system-ui, sans-serif;
+
+  /* Espaço */
+  --gutter: clamp(16px, 4vw, 40px);
+  --section: clamp(64px, 9vw, 128px);
+  --radius-sm: 8px;
+  --radius: 12px;
+  --radius-lg: 16px;
+
+  /* Elevação: camadas transparentes com deslocamento */
+  --shadow-1: 0 1px 2px rgb(36 16 48 / 0.06), 0 2px 6px rgb(36 16 48 / 0.05);
+  --shadow-2: 0 2px 4px rgb(36 16 48 / 0.05), 0 12px 32px -8px rgb(36 16 48 / 0.18);
+  --shadow-3: 0 8px 16px rgb(36 16 48 / 0.08), 0 32px 64px -12px rgb(36 16 48 / 0.28);
+
+  /* Movimento */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --cobalt: #6f7bff;
+    --cobalt-deep: #2a33a8;
+    --magenta: #ff5fa2;
+    --magenta-deep: #8f1a4e;
+    --mint: #34d1a4;
+    --mint-ink: #5fe0bb;
+
+    --paper: #150e1a;
+    --surface: #201828;
+    --surface-2: #2a2133;
+    --ink: #f3eef7;
+    --ink-2: #b9adc6;
+    --line: #382d42;
+    --line-strong: #4d4059;
+
+    --risk-low-bg: #0f3a2e;
+    --risk-low: #7fe8c6;
+    --risk-mid-bg: #3d3010;
+    --risk-mid: #ffd76a;
+    --risk-high-bg: #45122a;
+    --risk-high: #ff9ac3;
+
+    --shadow-1: 0 1px 2px rgb(0 0 0 / 0.3), 0 2px 6px rgb(0 0 0 / 0.25);
+    --shadow-2: 0 2px 4px rgb(0 0 0 / 0.3), 0 12px 32px -8px rgb(0 0 0 / 0.5);
+    --shadow-3: 0 8px 16px rgb(0 0 0 / 0.35), 0 32px 64px -12px rgb(0 0 0 / 0.6);
+  }
+}

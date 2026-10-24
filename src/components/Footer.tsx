@@ -1,0 +1,25 @@
+import { Link } from 'react-router-dom'
+import { Logo } from './Logo'
+
+export function Footer() {
+  return (
+    <footer className="footer">
+      <div className="container footer-inner">
+        <div className="footer-brand">
+          <Logo />
+          <p>Recrutamento por fit cultural, com capacitação técnica para quem tem o perfil certo.</p>
+        </div>
+        <nav className="footer-links" aria-label="Rodapé">
+          <Link to="/empresas">Para empresas</Link>
+          <Link to="/candidatos">Para candidatos</Link>
+          <Link to="/candidato/quiz">Mapeamento cultural</Link>
+          <Link to="/empresa/cultura">Perfil da empresa</Link>
+          <Link to="/pesquisa">Responder a pesquisa</Link>
+        </nav>
+        <p className="footer-note">
+          Protótipo de validação. Empresas, vagas e pessoas exibidas aqui são fictícias.
+        </p>
+      </div>
+    </footer>
+  )
+}

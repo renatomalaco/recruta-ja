@@ -1,0 +1,260 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scrollbar-color: var(--line-strong) var(--paper);
+}
+
+body {
+  margin: 0;
+  font-family: var(--font);
+  font-size: 1rem;
+  line-height: 1.55;
+  font-optical-sizing: auto;
+  color: var(--ink);
+  background: var(--paper);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  caret-color: var(--magenta);
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--sun);
+  color: var(--on-sun);
+}
+
+h1,
+h2,
+h3,
+p,
+ol,
+ul,
+dl,
+dd,
+figure,
+fieldset {
+  margin: 0;
+}
+
+ol,
+ul {
+  padding: 0;
+  list-style: none;
+}
+
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+a {
+  color: inherit;
+  text-underline-offset: 0.2em;
+  text-decoration-thickness: 1px;
+}
+
+button,
+input {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+img,
+svg {
+  display: block;
+}
+
+:focus-visible {
+  outline: 2px solid var(--cobalt);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+code {
+  font-family: ui-monospace, 'Cascadia Code', Menlo, monospace;
+  font-size: 0.9em;
+  background: var(--surface-2);
+  padding: 0.1em 0.35em;
+  border-radius: 4px;
+}
+
+/* Tipografia */
+.display {
+  font-size: clamp(2.6rem, 6.6vw, 5.4rem);
+  font-weight: 760;
+  font-stretch: 82%;
+  line-height: 0.98;
+  letter-spacing: -0.03em;
+}
+
+.h2 {
+  font-size: clamp(1.75rem, 3.4vw, 2.75rem);
+  font-weight: 700;
+  font-stretch: 88%;
+  line-height: 1.06;
+  letter-spacing: -0.025em;
+}
+
+.h3 {
+  font-size: 1.25rem;
+  font-weight: 650;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
+.lead {
+  font-size: clamp(1.1rem, 1.6vw, 1.3rem);
+  line-height: 1.5;
+}
+
+.small {
+  font-size: 0.875rem;
+  line-height: 1.45;
+}
+
+.muted {
+  color: var(--ink-2);
+}
+
+.strong {
+  font-weight: 650;
+}
+
+.block {
+  display: block;
+}
+
+.measure {
+  max-width: 62ch;
+}
+
+.tnum {
+  font-variant-numeric: tabular-nums;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.skip-link {
+  position: absolute;
+  left: 16px;
+  top: -100px;
+  z-index: 100;
+  background: var(--ink);
+  color: var(--paper);
+  padding: 10px 16px;
+  border-radius: var(--radius-sm);
+}
+
+.skip-link:focus {
+  top: 12px;
+}
+
+/* Layout */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.section {
+  padding-block: var(--section);
+}
+
+.section-head {
+  display: grid;
+  gap: 16px;
+  margin-bottom: clamp(32px, 5vw, 56px);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+/* Campos de cor: a cor é a superfície, não um detalhe */
+.field {
+  --field-ink: var(--ink);
+  color: var(--field-ink);
+}
+
+/* O campo amarelo é sempre um mundo claro, inclusive no modo escuro. */
+.field--sun {
+  background: var(--sun);
+  color-scheme: light;
+  --field-ink: var(--on-sun);
+  --ink: #241030;
+  --ink-2: #5b4a68;
+  --surface: #ffffff;
+  --surface-2: #efebf5;
+  --line: #e2dcea;
+  --line-strong: #c9bfd6;
+  --cobalt: #3442f0;
+  --magenta: #e0347e;
+  --shadow-3: 0 8px 16px rgb(36 16 48 / 0.08), 0 32px 64px -12px rgb(36 16 48 / 0.28);
+}
+
+.field--cobalt {
+  background: var(--cobalt-deep);
+  --field-ink: #ffffff;
+  --ink-2: #dfe1ff;
+}
+
+.field--magenta {
+  background: var(--magenta-deep);
+  --field-ink: #ffffff;
+  --ink-2: #ffe0ec;
+}
+
+.field--ink {
+  background: #241030;
+  --field-ink: #f6f0fa;
+  --ink-2: #cdbfd9;
+}
+
+.field ::selection {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.field--sun ::selection {
+  background: var(--on-sun);
+  color: var(--sun);
+}
+
+.field:not(.field--sun) :focus-visible {
+  outline-color: var(--sun);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
